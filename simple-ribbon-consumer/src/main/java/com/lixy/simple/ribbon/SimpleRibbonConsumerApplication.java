@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 
 @SpringBootApplication
+//使用ribbon客端负载有两种方式 1、使用一下配置使用java代码 2、在application.yml里面配置（优先级最高）
 //使用自定义ribbon负载 不能被component扫描到
 @ComponentScan(excludeFilters = {
         @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = RibbonConfig.class)

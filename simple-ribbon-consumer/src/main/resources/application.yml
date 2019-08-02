@@ -11,3 +11,9 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${server.port}
+
+#第二种负载模式 这种模式优先级最高
+#ribbon需要负载的微服务名称
+#simple-ribbon-provider:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
