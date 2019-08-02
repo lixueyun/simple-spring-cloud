@@ -17,3 +17,11 @@ eureka:
 #simple-ribbon-provider:
 #  ribbon:
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+#ribbo可不用eureka
+#ribbon:
+#  eureka:
+#    enabled: false
+#simple-ribbon-provider:
+#  ribbon:
+#    listOfServers: localhost:8081,localhost:8083
