@@ -1,5 +1,6 @@
 package com.lixy.simple.feign.consumer.controller.request;
 
+import com.lixy.simple.feign.consumer.annotation.FeignAttributeAnnotation;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
  * @author  lixueyun
  */
 @Data
+@FeignAttributeAnnotation
 public class QueryUserRequest {
 
     private String id;

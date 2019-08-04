@@ -1,5 +1,6 @@
 package com.lixy.simple.feign.consumer.controller;
 
+import com.lixy.simple.feign.consumer.api.UserClient;
 import com.lixy.simple.feign.consumer.controller.request.QueryUserRequest;
 import com.lixy.simple.feign.consumer.controller.response.QueryUserResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+
+import java.time.LocalDate;
 
 /**
  * @ClassName  UserController
@@ -22,12 +24,27 @@ import org.springframework.web.client.RestTemplate;
 public class UserController {
 
     @Autowired
-    private RestTemplate restTemplate;
+    private UserClient userClient;
 
-    @RequestMapping(value = "/query", method = RequestMethod.GET)
-    public QueryUserResponse queryById(@ModelAttribute QueryUserRequest request){
+//    @RequestMapping(value = "/query", method = RequestMethod.GET)
+//    public QueryUserResponse queryById(@ModelAttribute QueryUserRequest request){
+//        log.info("consumer接收到参数：{}", request);
+//        request.setBirthday(LocalDate.now());
+//        request.setAge(1);
+//        QueryUserResponse response = userClient.queryById(request);
+//        return response;
+//    }
+
+    @RequestMapping(value = "/query/feignClient", method = RequestMethod.GET)
+    public QueryUserResponse query(@ModelAttribute QueryUserRequest request){
         log.info("consumer接收到参数：{}", request);
-        QueryUserResponse response = restTemplate.getForObject("http://simple-ribbon-provider/user/query?name=lixueyun&age=12", QueryUserResponse.class);
+        request.setBirthday(LocalDate.now());
+        request.setAge(12);
+        QueryUserResponse response = userClient.queryOfFeignClien(request);
         return response;
     }
+
+
+
+
 }

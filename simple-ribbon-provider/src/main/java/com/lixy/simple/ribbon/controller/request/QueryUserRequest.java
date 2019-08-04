@@ -1,6 +1,7 @@
 package com.lixy.simple.ribbon.controller.request;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -21,6 +22,7 @@ public class QueryUserRequest {
 
     private Integer sex;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
 
 }
