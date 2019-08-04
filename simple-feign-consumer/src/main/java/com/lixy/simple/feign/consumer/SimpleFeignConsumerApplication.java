@@ -1,5 +1,6 @@
 package com.lixy.simple.feign.consumer;
 
+import com.lixy.simple.feign.consumer.config.EurekaFeignConfiguration;
 import com.lixy.simple.feign.consumer.config.UserFeignConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +15,8 @@ import org.springframework.context.annotation.FilterType;
 
 //如果自定义feign在扫描路径下 需要排除掉
 @ComponentScan(excludeFilters = {
-        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {UserFeignConfiguration.class})
+        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
+        classes = {UserFeignConfiguration.class, EurekaFeignConfiguration.class})
 })
 public class SimpleFeignConsumerApplication {
 

@@ -20,4 +20,5 @@ public interface UserClient {
     @RequestLine("GET /user/query")
     QueryUserResponse queryOfFeignClien(@QueryMap QueryUserRequest request);
 
+
 }

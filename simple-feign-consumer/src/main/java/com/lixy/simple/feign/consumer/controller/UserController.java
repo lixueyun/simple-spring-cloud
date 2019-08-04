@@ -1,14 +1,12 @@
 package com.lixy.simple.feign.consumer.controller;
 
+import com.lixy.simple.feign.consumer.api.EurekaClient;
 import com.lixy.simple.feign.consumer.api.UserClient;
 import com.lixy.simple.feign.consumer.controller.request.QueryUserRequest;
 import com.lixy.simple.feign.consumer.controller.response.QueryUserResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -26,6 +24,9 @@ public class UserController {
     @Autowired
     private UserClient userClient;
 
+    @Autowired
+    private EurekaClient eurekaClient;
+
 //    @RequestMapping(value = "/query", method = RequestMethod.GET)
 //    public QueryUserResponse queryById(@ModelAttribute QueryUserRequest request){
 //        log.info("consumer接收到参数：{}", request);
@@ -42,6 +43,13 @@ public class UserController {
         request.setAge(12);
         QueryUserResponse response = userClient.queryOfFeignClien(request);
         return response;
+    }
+
+    @RequestMapping(value = "/eureka/{serviceName}", method = RequestMethod.GET)
+    public String query(@PathVariable(value = "serviceName") String serviceName){
+        log.info("consumer接收到参数：{}", serviceName);
+        String serverInfo = eurekaClient.findServerInfoByEureka(serviceName);
+        return serverInfo;
     }
 
 
