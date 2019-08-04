@@ -2,6 +2,7 @@ package com.lixy.simple.feign.consumer.config;
 
 import com.lixy.simple.feign.consumer.annotation.FeignAttributeAnnotation;
 import feign.Contract;
+import feign.Logger;
 import feign.RequestTemplate;
 import feign.codec.Encoder;
 import org.springframework.beans.factory.ObjectFactory;
@@ -39,6 +40,15 @@ public class UserFeignConfiguration extends FeignClientsConfiguration {
     @Override
     public Contract feignContract(ConversionService feignConversionService) {
         return  new feign.Contract.Default();
+    }
+
+
+
+    //启用feign日志
+    @Bean
+    @ConditionalOnMissingBean
+    Logger.Level feignLoggerLevel() {
+        return Logger.Level.FULL;
     }
 
     /**
