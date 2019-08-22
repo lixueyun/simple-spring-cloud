@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: simple-ribbon-hystrix
+server:
+  port: 8084
+
+eureka:
+  client:
+    #    注册中心地址
+    service-url:
+      defaultZone: http://lixy:Ml06200818@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+#第二种负载模式 这种模式优先级最高
+#ribbon需要负载的微服务名称
+simple-ribbon-provider:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: '*'
+        exclude: ''
+  endpoint:
+    health:
+      show-details: always
