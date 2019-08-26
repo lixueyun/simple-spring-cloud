@@ -7,21 +7,21 @@ spring:
     allow-bean-definition-overriding: true
 eureka:
   client:
-    #    ×¢²áÖĞĞÄµØÖ·
+    #    æ³¨å†Œä¸­å¿ƒåœ°å€
     service-url:
       defaultZone: http://lixy:Ml06200818@localhost:8761/eureka/
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${server.port}
-
-
-#feignÈÕÖ¾
+#hystrixé»˜è®¤è¶…æ—¶æ—¶é—´  é»˜è®¤1s
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 2000
+#feignæ—¥å¿—
 logging:
   level:
     com.lixy.simple.feign.consumer.api.UserClient: debug
 
-#µÚ¶şÖÖ¸ºÔØÄ£Ê½ ÕâÖÖÄ£Ê½ÓÅÏÈ¼¶×î¸ß
-#ribbonĞèÒª¸ºÔØµÄÎ¢·şÎñÃû³Æ
+#ç¬¬äºŒç§è´Ÿè½½æ¨¡å¼ è¿™ç§æ¨¡å¼ä¼˜å…ˆçº§æœ€é«˜
+#ribbonéœ€è¦è´Ÿè½½çš„å¾®æœåŠ¡åç§°
 simple-ribbon-provider:
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
