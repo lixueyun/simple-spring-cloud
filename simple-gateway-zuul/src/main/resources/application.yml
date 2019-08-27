@@ -1,0 +1,48 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: simple-gateway-zuul
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    #    注册中心地址
+    service-url:
+      defaultZone: http://lixy:Ml06200818@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+zuul:
+  ignored-services: "*"
+  #  第一种方式
+  #  routes:
+  #    simple-ribbon-provider: /user/**
+
+  #  第二种方式
+  #  routes:
+  #    user:
+  #      path: /myUser/**
+  #      serviceId: simple-ribbon-provider
+
+  #  第三种方式
+  routes:
+    user:
+      path: /userUrl/**
+      url: http://localhost:8081/
+
+
+#hystrix默认超时时间  默认1s
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 2000
+
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: '*'
+        exclude: ''
+  endpoint:
+    health:
+      show-details: always
